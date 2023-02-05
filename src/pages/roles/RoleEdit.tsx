@@ -43,7 +43,8 @@ const UserEdit = () => {
             e.preventDefault();
 
             await axios.put(`roles/${id}`, {
-                name
+                name,
+                permissions: selected
             });
 
             setRedirect(true);

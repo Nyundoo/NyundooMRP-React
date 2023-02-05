@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, {SyntheticEvent, useState} from 'react';
+import React, {SyntheticEvent, useRef, useState} from 'react';
 import Wrapper from "../../components/Wrapper";
 import ImageUpload from "../../components/ImageUpload";
 import { Navigate } from 'react-router-dom';
@@ -8,8 +8,9 @@ const ProductCreate = () => {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [image, setImage] = useState('');
-    const [price, setPrice] = useState('');
-    const [redirect, setRedirect] = useState(false);
+    const [pricex, setPrice] = useState('');
+    const [redirect, setRedirect] = useState(false);    
+    const ref = useRef<HTMLInputElement>(null);
 
     const submit = async (e: SyntheticEvent) => {
         e.preventDefault();
@@ -18,10 +19,17 @@ const ProductCreate = () => {
             title,
             description,
             image,
-            price
+            price: parseFloat(pricex)
         });
 
         setRedirect(true);
+    }
+
+    const updateImage = (url: string) => {
+        if (ref.current) {
+            ref.current.value = url;
+        }
+        setImage(url);
     }
 
     if (redirect) {

@@ -30,51 +30,50 @@ const RoleCreate = () => {
     }
 
     const submit = async (e: SyntheticEvent) => {
-        
         e.preventDefault();
 
         await axios.post('roles', {
             name,
-            permissions:  selected
+            permissions: selected
         });
 
         setRedirect(true);
     }
 
     if (redirect) {
-        return <Navigate replace to="/users" />;
+        return <Navigate replace to="/roles" />;
     }
 
     return (
         <Wrapper>
-        <form onSubmit={submit}>
-            <div className="mb-3 mt-3 row">
-                <label className="col-sm-2 col-form-label">Name</label>
-                <div className="col-sm-10">
-                    <input className="form-control" onChange={e => setName(e.target.value)}/>
+            <form onSubmit={submit}>
+                <div className="mb-3 mt-3 row">
+                    <label className="col-sm-2 col-form-label">Name</label>
+                    <div className="col-sm-10">
+                        <input className="form-control" onChange={e => setName(e.target.value)}/>
+                    </div>
                 </div>
-            </div>
 
-            <div className="mb-3 row">
-                <label className="col-sm-2 col-form-label">Permissions</label>
-                <div className="col-sm-10">
-                    {permissions.map((p: Permission) => {
-                        return (
-                            <div className="form-check form-check-inline col-3" key={p.id}>
-                                <input className="form-check-input" type="checkbox"
-                                       value={p.id}
-                                       onChange={() => check(p.id)}
-                                />
-                                <label className="form-check-label">{p.name}</label>
-                            </div>
-                        )
-                    })}
+                <div className="mb-3 row">
+                    <label className="col-sm-2 col-form-label">Permissions</label>
+                    <div className="col-sm-10">
+                        {permissions.map((p: Permission) => {
+                            return (
+                                <div className="form-check form-check-inline col-3" key={p.id}>
+                                    <input className="form-check-input" type="checkbox"
+                                           value={p.id}
+                                           onChange={() => check(p.id)}
+                                    />
+                                    <label className="form-check-label">{p.name}</label>
+                                </div>
+                            )
+                        })}
+                    </div>
                 </div>
-            </div>
 
-            <button className="btn btn-outline-secondary">Save</button>
-        </form>
-    </Wrapper>
+                <button className="btn btn-outline-secondary">Save</button>
+            </form>
+        </Wrapper>
     );
 };
 

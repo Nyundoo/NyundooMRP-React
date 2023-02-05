@@ -9,7 +9,7 @@ const UserEdit = () => {
         const [first_name, setFirstName] = useState('');
         const [last_name, setLastName] = useState('');
         const [email, setEmail] = useState('');
-        const [role_id, setRoleId] = useState('');
+        const [role_idx, setRoleId] = useState('');
         const [roles, setRoles] = useState([]);
         const [redirect, setRedirect] = useState(false);
 
@@ -39,10 +39,14 @@ const UserEdit = () => {
                 first_name,
                 last_name,
                 email,
-                role_id
+                role_id: parseFloat(role_idx)
             });
     
             setRedirect(true);
+        }
+
+        if(redirect) {
+            return <Navigate replace to="/users" />;
         }
 
     return (
@@ -73,7 +77,7 @@ const UserEdit = () => {
                 <div className="mb-3">
                     <label>Role</label>
                     <select className="form-control"
-                            value={role_id}
+                            value={role_idx}
                             onChange={e => setRoleId(e.target.value)}>
                         {roles.map((r: Role) => {
                             return (

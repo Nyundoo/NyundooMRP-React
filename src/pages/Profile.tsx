@@ -1,9 +1,9 @@
 import axios from 'axios';
-import React, {Dispatch, SyntheticEvent, useEffect, useState} from 'react';
+import React, { Dispatch, SyntheticEvent, useEffect, useState } from 'react';
 import Wrapper from "../components/Wrapper";
-import {connect} from "react-redux";
-import {User} from "../models/user";
-import {setUser} from "../redux/actions/setUserAction";
+import { connect } from "react-redux";
+import { User } from "../models/user";
+import { setUser } from "../redux/actions/setUserAction";
 
 const Profile = (props: { user: User, setUser: (user: User) => void }) => {
     const [first_name, setFirstName] = useState('');
@@ -21,18 +21,18 @@ const Profile = (props: { user: User, setUser: (user: User) => void }) => {
     const infoSubmit = async (e: SyntheticEvent) => {
         e.preventDefault();
 
-        const {data} = await axios.put('users/info', {
+        const { data } = await axios.put('users/info', {
             first_name,
             last_name,
             email
         });
 
         props.setUser(new User(
-            data.id,
-            data.first_name,
-            data.last_name,
-            data.email,
-            data.role
+            data.data.user.id,
+            data.data.user.first_name,
+            data.data.user.last_name,
+            data.data.user.email,
+            data.data.user.role
         ));
     }
 
@@ -52,22 +52,22 @@ const Profile = (props: { user: User, setUser: (user: User) => void }) => {
                 <div className="mb-3">
                     <label>First Name</label>
                     <input className="form-control"
-                           defaultValue={first_name}
-                           onChange={e => setFirstName(e.target.value)}
+                        defaultValue={first_name}
+                        onChange={e => setFirstName(e.target.value)}
                     />
                 </div>
                 <div className="mb-3">
                     <label>Last Name</label>
                     <input className="form-control"
-                           defaultValue={last_name}
-                           onChange={e => setLastName(e.target.value)}
+                        defaultValue={last_name}
+                        onChange={e => setLastName(e.target.value)}
                     />
                 </div>
                 <div className="mb-3">
                     <label>Email</label>
                     <input className="form-control"
-                           defaultValue={email}
-                           onChange={e => setEmail(e.target.value)}
+                        defaultValue={email}
+                        onChange={e => setEmail(e.target.value)}
                     />
                 </div>
 
@@ -79,13 +79,13 @@ const Profile = (props: { user: User, setUser: (user: User) => void }) => {
                 <div className="mb-3">
                     <label>Password</label>
                     <input type="password" className="form-control"
-                           onChange={e => setPassword(e.target.value)}
+                        onChange={e => setPassword(e.target.value)}
                     />
                 </div>
                 <div className="mb-3">
                     <label>Password Confirm</label>
                     <input type="password" className="form-control"
-                           onChange={e => setPasswordConfirm(e.target.value)}
+                        onChange={e => setPasswordConfirm(e.target.value)}
                     />
                 </div>
 

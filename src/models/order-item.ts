@@ -1,7 +1,7 @@
 export class OrderItem {
     constructor(
-        public id: number,
-        public product_title: string,
+        public id: number,        
+        public product_id: number,
         public price: number,
         public quantity: number
     ) {

@@ -17,11 +17,11 @@ const Wrapper = (props: any) => {
                     const {data} = await axios.get('user');
 
                     props.setUser(new User(
-                        data.id,
-                        data.first_name,
-                        data.last_name,
-                        data.email,
-                        data.role
+                        data.data.user.id,
+                        data.data.user.first_name,
+                        data.data.user.last_name,
+                        data.data.user.email,
+                        data.data.user.role
                     ));
                 } catch (e) {
                     setRedirect(true);
